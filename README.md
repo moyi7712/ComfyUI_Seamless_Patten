@@ -1,9 +1,17 @@
-It change UNetModel Conv2d Layer into circular padding mode that make any text2image process generate seamless patten
+It change UNetModel and VAE Conv2d Layer into circular padding mode that make any text2image process generate seamless patten
 
 ```python
+model = model.clone()
 for layer in model.model.diffusion_model.modules():
     if (isinstance(layer, nn.Conv2d)):
         layer.padding_mode = 'circular'
+
+patcher = vae.patcher.clone()
+for layer in patcher.model.modules():
+    if (isinstance(layer, nn.Conv2d)):
+        layer.padding_mode = 'circular'
+vae.patcher = patcher
+vae.first_stage_model = patcher.model
 ```
 
 <div class="image-container">
@@ -32,12 +40,12 @@ for layer in model.model.diffusion_model.modules():
     </head>
     <body>
         <div class="image-container">
-            <img src="./example/seamless.jpg" alt="Image 1">
-            <img src="./example/seamless.jpg" alt="Image 2">
+            <img src="./example/seamless2.png" alt="Image 1">
+            <img src="./example/seamless2.png" alt="Image 2">
         </div>
         <div class="image-container">
-            <img src="./example/seamless.jpg" alt="Image 3">
-            <img src="./example/seamless.jpg" alt="Image 4">
+            <img src="./example/seamless2.png" alt="Image 3">
+            <img src="./example/seamless2.png" alt="Image 4">
         </div>
     </body>
 </html> -->
