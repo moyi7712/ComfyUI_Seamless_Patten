@@ -1,0 +1,14 @@
+[project]
+name = "comfyui_seamless_patten"
+description = "It make any text2image create seamless patten"
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/moyi7712/ComfyUI_Seamless_Patten"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI_Seamless_Patten"
+Icon = ""
