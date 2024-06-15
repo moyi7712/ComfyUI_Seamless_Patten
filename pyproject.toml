@@ -9,6 +9,6 @@ Repository = "https://github.com/moyi7712/ComfyUI_Seamless_Patten"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
-PublisherId = "haiya_comfyui"
+PublisherId = "haiya7712"
 DisplayName = "ComfyUI_Seamless_Patten"
 Icon = ""
