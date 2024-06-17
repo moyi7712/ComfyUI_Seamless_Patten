@@ -17,18 +17,22 @@ class SeamlessApply:
     CATEGORY = "Seamless"
 
     def apply(self, model, vae, active):
-        if not active:
-            return (model, vae)
-        
         model = model.clone()
         for layer in model.model.diffusion_model.modules():
             if (isinstance(layer, nn.Conv2d)):
-                layer.padding_mode = 'circular'
+                if active:
+                    layer.padding_mode = 'circular'
+                else:
+                    layer.padding_mode = 'zeros'
+
         
         patcher = vae.patcher.clone()
         for layer in patcher.model.modules():
             if (isinstance(layer, nn.Conv2d)):
-                layer.padding_mode = 'circular'
+                if active:
+                    layer.padding_mode = 'circular'
+                else:
+                    layer.padding_mode = 'zeros'
         vae.patcher = patcher
         vae.first_stage_model = patcher.model
         return (model, vae)
