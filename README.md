@@ -1,15 +1,24 @@
 It change UNetModel and VAE Conv2d Layer into circular padding mode that make any text2image process generate seamless patten
 
+Core code:
 ```python
+if not active:
+    return (model, vae)
+
 model = model.clone()
-for layer in model.model.diffusion_model.modules():
-    if (isinstance(layer, nn.Conv2d)):
-        layer.padding_mode = 'circular'
+
+unet_prehook = model.model.diffusion_model.register_forward_pre_hook(circular_hook_pre)
+unet_hook = model.model.diffusion_model.register_forward_hook(circular_hook)
+setattr(model.model.diffusion_model, 'circular_pre_hook', unet_prehook)
+setattr(model.model.diffusion_model, 'circular_hook', unet_hook)
 
 patcher = vae.patcher.clone()
 for layer in patcher.model.modules():
     if (isinstance(layer, nn.Conv2d)):
-        layer.padding_mode = 'circular'
+        pre_hook = layer.register_forward_pre_hook(vae_circular_hook_pre)
+        hook = layer.register_forward_hook(vae_circular_hook)
+        setattr(layer, 'circular_pre_hook', pre_hook)
+        setattr(layer, 'circular_hook', hook)
 vae.patcher = patcher
 vae.first_stage_model = patcher.model
 ```
