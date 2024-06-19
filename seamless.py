@@ -29,7 +29,7 @@ def circular_hook_pre(module, input):
 def circular_hook(module, input, output):
     time_emb = input[1]
 
-    if time_emb>1:
+    if time_emb.max()/time_emb.shape[0]>1:
 
         return
     for layer in module.modules():
