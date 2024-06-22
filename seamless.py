@@ -155,7 +155,7 @@ class SeamlessKSampler:
     RETURN_TYPES = ("LATENT",)
     FUNCTION = "sample"
 
-    CATEGORY = "sampling"
+    CATEGORY = "Seamless"
 
     def sample(self, model, seed, steps, cfg, sampler_name, scheduler, positive, negative, latent_image, denoise=1.0):
         padding_mode_list = []
@@ -199,7 +199,7 @@ class SeamlessKSamplerAdvanced:
     RETURN_TYPES = ("LATENT",)
     FUNCTION = "sample"
 
-    CATEGORY = "sampling"
+    CATEGORY = "Seamless"
 
     def sample(self, model, add_noise, noise_seed, steps, cfg, sampler_name, scheduler, positive, negative, latent_image, start_at_step, end_at_step, return_with_leftover_noise, denoise=1.0):
         padding_mode_list = []
