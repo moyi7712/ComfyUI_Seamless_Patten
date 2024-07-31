@@ -2,7 +2,7 @@
 name = "comfyui_seamless_patten"
 description = "It make any text2image create seamless patten"
 version = "1.1.0"
-license = "LICENSE"
+license = { file = "LICENSE" }
 
 [project.urls]
 Repository = "https://github.com/moyi7712/ComfyUI_Seamless_Patten"
